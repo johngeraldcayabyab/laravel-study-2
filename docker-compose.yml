@@ -100,6 +100,15 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    rabbitmq:
+        build:
+            context: ./docker/rabbitmq
+            dockerfile: Dockerfile
+        ports:
+            - '${FORWARD_MQ_PORT:-5672}:5672'
+            - '${FORWARD_MQ_DASHBOARD_PORT:-15672}:15672'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
